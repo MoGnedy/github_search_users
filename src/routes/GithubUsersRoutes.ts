@@ -1,4 +1,5 @@
 import { UserServiceFactory } from "../services/UserServiceFactory";
+import { usersQueryStringValidator } from "../middlewares/UsersQueryStringValidator";
 import { UserController } from "../controllers/UserController";
 import express, { NextFunction, Request, Response } from "express";
 
@@ -6,6 +7,7 @@ export const router = express.Router();
 
 router.get(
   "/users",
+  usersQueryStringValidator,
   async (
     request: Request,
     response: Response,
