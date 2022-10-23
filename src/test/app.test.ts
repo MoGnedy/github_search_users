@@ -15,15 +15,6 @@ const expectedSuccessResponse = expect.objectContaining({
   }),
 });
 
-const expectErrorResponse = expect.objectContaining({
-  errors: expect.arrayContaining([
-    expect.objectContaining({
-      key: expect.any(Array),
-      message: expect.any(String),
-    }),
-  ]),
-});
-
 describe("GET /api/v1/github/users", () => {
   test("Responds with json when no query params are provided ", async () => {
     const response = await request(app)
@@ -54,7 +45,16 @@ describe("GET /api/v1/github/users", () => {
       .set({ Accept: "application/json" });
 
     expect(response.status).toEqual(400);
-    expect(response.body).toEqual(expectErrorResponse);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        errors: expect.arrayContaining([
+          expect.objectContaining({
+            key: expect.any(String),
+            message: expect.any(String),
+          }),
+        ]),
+      })
+    );
   });
 
   test("Responds with 400 when bad query parameters are provided", async () => {
@@ -64,6 +64,15 @@ describe("GET /api/v1/github/users", () => {
       .set({ Accept: "application/json" });
 
     expect(response.status).toEqual(400);
-    expect(response.body).toEqual(expectErrorResponse);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        errors: expect.arrayContaining([
+          expect.objectContaining({
+            key: expect.any(Array),
+            message: expect.any(String),
+          }),
+        ]),
+      })
+    );
   });
 });
