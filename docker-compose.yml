@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  api-dev:
+    build:
+      context: ./
+      target: development
+    volumes:
+      - .:/src
+    ports:
+      - "${PORT}:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      GITHUB_API_TOKEN: ${GITHUB_API_TOKEN}
+
+  api:
+    build:
+      context: ./
+      target: production
+    volumes:
+      - .:/src
+    ports:
+      - "${PORT}:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      GITHUB_API_TOKEN: ${GITHUB_API_TOKEN}
