@@ -9,6 +9,7 @@ services:
     ports:
       - "${PORT}:3000"
     environment:
+      PORT: ${PORT}
       NODE_ENV: ${NODE_ENV}
       GITHUB_API_TOKEN: ${GITHUB_API_TOKEN}
 
@@ -21,5 +22,6 @@ services:
     ports:
       - "${PORT}:3000"
     environment:
+      PORT: ${PORT}
       NODE_ENV: ${NODE_ENV}
       GITHUB_API_TOKEN: ${GITHUB_API_TOKEN}
