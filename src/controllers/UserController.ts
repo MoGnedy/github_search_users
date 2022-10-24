@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
+import { UserServiceInterface } from "../services/UserServiceInterface";
 import { User } from "../models/User";
-import { UserService } from "../services/UserService";
 
 export declare type GetUsersResponse = {
   users: User[];
@@ -10,7 +10,7 @@ export declare type GetUsersResponse = {
 };
 
 export class UserController {
-  public constructor(private _service: UserService) {}
+  public constructor(private _service: UserServiceInterface) {}
 
   public async getUsers(
     request: Request,
